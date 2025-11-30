@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پلی‌لیست آنلاین من</title>
+    
+    <!-- جلوگیری از کش شدن صفحه در مرورگر -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <!-- استفاده از Tailwind برای استایل‌دهی سریع و زیبا -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- آیکون‌های Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* فونت وزیرمتن برای زیبایی فارسی */
+        @import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css');
+        
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: linear-gradient(135deg, #1a1c2c 0%, #4a192c 100%);
+            min-height: 100vh;
+        }
+
+        /* استایل سفارشی برای نوار پیمایش */
+        input[type=range] {
+            -webkit-appearance: none;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: #fff;
+            margin-top: -6px;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: rgba(255,255,255,0.2);
+            border-radius: 2px;
+        }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .playing-row {
+            background: rgba(255, 255, 255, 0.15);
+            border-right: 4px solid #10b981;
+        }
+        
+        /* انیمیشن برای کاور آلبوم در حال پخش */
+        .spin-slow {
+            animation: spin 10s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .paused-anim {
+            animation-play-state: paused;
+        }
+    </style>
+</head>
+<body class="text-white flex items-center justify-center p-4">
+
+    <div class="w-full max-w-md glass-panel rounded-3xl overflow-hidden shadow-2xl relative">
+        
+        <!-- بخش هدر -->
+        <div class="p-6 text-center border-b border-white/10">
+            <h1 class="text-xl font-bold">پلی‌لیست گیت‌هاب</h1>
+            <p class="text-xs text-gray-300 mt-1">بروزرسانی زنده از فایل متنی</p>
+        </div>
+
+        <!-- بخش پلیر -->
+        <div class="p-6 flex flex-col items-center">
+            <!-- کاور موزیک (پیش‌فرض) -->
+            <div class="w-48 h-48 rounded-full bg-gradient-to-tr from-purple-500 to-pink-500 shadow-xl mb-6 flex items-center justify-center relative overflow-hidden ring-4 ring-white/10" id="albumArt">
+                <i data-lucide="music" class="w-16 h-16 text-white opacity-80"></i>
+            </div>
+
+            <!-- اطلاعات آهنگ -->
+            <h2 id="songTitle" class="text-2xl font-bold mb-1 text-center truncate w-full">در حال بارگذاری...</h2>
+            <p id="artistName" class="text-gray-300 text-sm mb-6 text-center">لطفا کمی صبر کنید</p>
+
+            <!-- نوار پیشرفت -->
+            <div class="w-full mb-2 flex justify-between text-xs text-gray-400">
+                <span id="currentTime">0:00</span>
+                <span id="duration">0:00</span>
+            </div>
+            <input type="range" id="progressBar" value="0" class="w-full mb-6" disabled>
+
+            <!-- دکمه‌های کنترل -->
+            <div class="flex items-center justify-center gap-6">
+                <button id="prevBtn" class="hover:text-emerald-400 transition transform hover:scale-110">
+                    <i data-lucide="skip-back" class="w-8 h-8"></i>
+                </button>
+                
+                <button id="playBtn" class="bg-white text-gray-900 rounded-full p-4 hover:bg-emerald-400 hover:text-white transition shadow-lg transform hover:scale-105">
+                    <i data-lucide="play" class="w-8 h-8 fill-current"></i>
+                </button>
+                
+                <button id="nextBtn" class="hover:text-emerald-400 transition transform hover:scale-110">
+                    <i data-lucide="skip-forward" class="w-8 h-8"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- لیست پخش -->
+        <div class="bg-black/20 max-h-64 overflow-y-auto p-4 custom-scrollbar">
+            <h3 class="text-xs font-bold text-gray-400 mb-3 uppercase tracking-wider">لیست آهنگ‌ها</h3>
+            <ul id="playlistContainer" class="space-y-2">
+                <!-- آیتم‌ها توسط جاوااسکریپت پر می‌شوند -->
+                <li class="text-center text-sm text-gray-500">...</li>
+            </ul>
+        </div>
+
+        <!-- عنصر صوتی مخفی -->
+        <audio id="audioPlayer"></audio>
+    </div>
+
+    <script>
+        // آیکون‌ها را فعال کن
+        lucide.createIcons();
+
+        // متغیرهای اصلی
+        const audio = document.getElementById('audioPlayer');
+        const playBtn = document.getElementById('playBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const progressBar = document.getElementById('progressBar');
+        const songTitle = document.getElementById('songTitle');
+        const artistName = document.getElementById('artistName');
+        const currentTimeEl = document.getElementById('currentTime');
+        const durationEl = document.getElementById('duration');
+        const playlistContainer = document.getElementById('playlistContainer');
+        const albumArt = document.getElementById('albumArt');
+
+        let playlist = [];
+        let currentTrackIndex = 0;
+        let isPlaying = false;
+
+        // --- بخش مهم: لود کردن فایل متنی با فال‌بک ---
+        async function loadPlaylistFile() {
+            try {
+                // اضافه کردن timestamp برای جلوگیری از کش
+                const timestamp = new Date().getTime();
+                
+                // تلاش برای دانلود فایل متنی
+                // نکته: اگر در محیطی باشیم که فایل وجود ندارد، به catch می‌رویم
+                const response = await fetch(`playlist.txt?t=${timestamp}`, {
+                    cache: "no-store"
+                });
+
+                if (!response.ok) throw new Error("فایل پیدا نشد");
+
+                const text = await response.text();
+                parsePlaylist(text);
+            } catch (error) {
+                console.warn("حالت پیش‌نمایش فعال شد (فایل playlist.txt پیدا نشد):", error);
+                
+                // لیست پخش پیش‌فرض (Fallback)
+                // این لیست فقط وقتی استفاده می‌شود که فایل اصلی در دسترس نباشد
+                const fallbackData = `
+https://dl.pmcmusic.tv/1402/09/Hayedeh%20-%20Saghi.mp3,ساقی,هایده
+https://cdn.musicgitar.ir/Music/Mahasti/320/Mahasti%20-%20Mosafer%20[320].mp3?src=musicgitar,مسافر,مهستی
+                `;
+                
+                parsePlaylist(fallbackData);
+                
+                // نمایش پیام در کنسول که بدانید از نسخه پشتیبان استفاده شده است
+                console.log("از لیست پخش پیش‌فرض استفاده شد.");
+            }
+        }
+
+        // تبدیل متن به آرایه پلی‌لیست
+        function parsePlaylist(text) {
+            // فرض بر این است که هر خط به صورت: url,title,artist است
+            const lines = text.split('\n');
+            playlist = lines
+                .map(line => line.trim())
+                .filter(line => line.length > 0 && !line.startsWith('#')) // نادیده گرفتن خطوط خالی و کامنت
+                .map(line => {
+                    // جدا کردن با ویرگول (اگر ویرگول نبود، کل خط لینک است)
+                    const parts = line.split(',');
+                    return {
+                        url: parts[0]?.trim(),
+                        title: parts[1]?.trim() || "آهنگ بدون نام",
+                        artist: parts[2]?.trim() || "ناشناس"
+                    };
+                });
+
+            if (playlist.length > 0) {
+                renderPlaylistUI();
+                loadTrack(0, false); // آهنگ اول را لود کن اما پخش نکن
+            } else {
+                songTitle.innerText = "لیست خالی است";
+                artistName.innerText = "";
+            }
+        }
+
+        // نمایش لیست در UI
+        function renderPlaylistUI() {
+            playlistContainer.innerHTML = '';
+            playlist.forEach((track, index) => {
+                const li = document.createElement('li');
+                li.className = `p-3 rounded-lg cursor-pointer flex items-center justify-between text-sm hover:bg-white/5 transition ${index === currentTrackIndex ? 'playing-row' : ''}`;
+                li.innerHTML = `
+                    <div class="flex flex-col overflow-hidden">
+                        <span class="font-bold truncate">${track.title}</span>
+                        <span class="text-xs text-gray-400 truncate">${track.artist}</span>
+                    </div>
+                    ${index === currentTrackIndex ? '<i data-lucide="bar-chart-2" class="w-4 h-4 text-emerald-400"></i>' : ''}
+                `;
+                li.onclick = () => {
+                    loadTrack(index, true);
+                };
+                playlistContainer.appendChild(li);
+            });
+            lucide.createIcons();
+        }
+
+        // لود کردن آهنگ
+        function loadTrack(index, playImmediately) {
+            currentTrackIndex = index;
+            const track = playlist[index];
+            
+            audio.src = track.url;
+            songTitle.innerText = track.title;
+            artistName.innerText = track.artist;
+            
+            // بروزرسانی استایل لیست
+            renderPlaylistUI();
+
+            if (playImmediately) {
+                playSong();
+            } else {
+                pauseSong(); // فقط آماده‌سازی
+            }
+        }
+
+        // توابع پخش و توقف
+        function playSong() {
+            isPlaying = true;
+            audio.play().catch(e => console.log("خطای پخش خودکار:", e));
+            playBtn.innerHTML = '<i data-lucide="pause" class="w-8 h-8 fill-current"></i>';
+            albumArt.classList.add('spin-slow');
+            albumArt.classList.remove('paused-anim');
+            lucide.createIcons();
+        }
+
+        function pauseSong() {
+            isPlaying = false;
+            audio.pause();
+            playBtn.innerHTML = '<i data-lucide="play" class="w-8 h-8 fill-current"></i>';
+            albumArt.classList.add('paused-anim');
+            lucide.createIcons();
+        }
+
+        function togglePlay() {
+            if (isPlaying) pauseSong();
+            else playSong();
+        }
+
+        function nextSong() {
+            let nextIndex = currentTrackIndex + 1;
+            if (nextIndex >= playlist.length) nextIndex = 0; // لوپ به اول
+            loadTrack(nextIndex, true);
+        }
+
+        function prevSong() {
+            let prevIndex = currentTrackIndex - 1;
+            if (prevIndex < 0) prevIndex = playlist.length - 1;
+            loadTrack(prevIndex, true);
+        }
+
+        // بروزرسانی نوار پیشرفت
+        audio.addEventListener('timeupdate', (e) => {
+            const { duration, currentTime } = e.srcElement;
+            if (isNaN(duration)) return;
+            
+            const progressPercent = (currentTime / duration) * 100;
+            progressBar.value = progressPercent;
+            
+            // فرمت زمان
+            currentTimeEl.innerText = formatTime(currentTime);
+            durationEl.innerText = formatTime(duration);
+        });
+
+        // کلیک روی نوار پیشرفت
+        progressBar.addEventListener('input', () => {
+            const duration = audio.duration;
+            audio.currentTime = (progressBar.value / 100) * duration;
+        });
+        
+        // فعال‌سازی نوار پیشرفت وقتی متادیتای آهنگ لود شد
+        audio.addEventListener('loadedmetadata', () => {
+            progressBar.disabled = false;
+            durationEl.innerText = formatTime(audio.duration);
+        });
+
+        // رفتن به آهنگ بعدی وقتی آهنگ تمام شد
+        audio.addEventListener('ended', nextSong);
+
+        // فرمت کردن زمان (تبدیل ثانیه به دقیقه:ثانیه)
+        function formatTime(seconds) {
+            const min = Math.floor(seconds / 60);
+            const sec = Math.floor(seconds % 60);
+            return `${min}:${sec < 10 ? '0' + sec : sec}`;
+        }
+
+        // رویداد دکمه‌ها
+        playBtn.addEventListener('click', togglePlay);
+        nextBtn.addEventListener('click', nextSong);
+        prevBtn.addEventListener('click', prevSong);
+
+        // شروع برنامه
+        loadPlaylistFile();
+
+    </script>
+</body>
+</html>
