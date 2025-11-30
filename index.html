@@ -3,30 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>پلی‌لیست آنلاین من</title>
+    <title>پلی‌لیست سنتی من</title>
     
-    <!-- جلوگیری از کش شدن صفحه در مرورگر -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
 
-    <!-- استفاده از Tailwind برای استایل‌دهی سریع و زیبا -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- آیکون‌های Lucide -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
-        /* فونت وزیرمتن برای زیبایی فارسی */
         @import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css');
         
         body {
             font-family: 'Vazirmatn', sans-serif;
-            background: linear-gradient(135deg, #1a1c2c 0%, #4a192c 100%);
+            /* رنگ پس‌زمینه کل صفحه (بیرون قاب) - سرمه‌ای تیره هماهنگ با قاب */
+            background-color: #0f172a;
+            background-image: radial-gradient(#1e293b 1px, transparent 1px);
+            background-size: 20px 20px;
             min-height: 100vh;
         }
 
-        /* استایل سفارشی برای نوار پیمایش */
+        /* تنظیمات اسلایدر (Seek Bar) با رنگ طلایی */
         input[type=range] {
             -webkit-appearance: none;
             background: transparent;
@@ -36,31 +34,62 @@
             height: 16px;
             width: 16px;
             border-radius: 50%;
-            background: #fff;
+            background: #b45309; /* طلایی تیره */
             margin-top: -6px;
             cursor: pointer;
-            box-shadow: 0 0 10px rgba(255,255,255,0.5);
+            box-shadow: 0 0 5px rgba(180, 83, 9, 0.5);
         }
         input[type=range]::-webkit-slider-runnable-track {
             width: 100%;
             height: 4px;
             cursor: pointer;
-            background: rgba(255,255,255,0.2);
+            background: #e2e8f0; /* طوسی روشن برای زمینه سفید */
             border-radius: 2px;
         }
-        
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+
+        /* کانتینر اصلی که عکس قاب را نگه می‌دارد */
+        .frame-container {
+            /* نام فایل عکس باید bg.jpg باشد */
+            background-image: url('bg.jpg'); 
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            
+            /* نسبت تصویر قاب (تقریباً 3 به 5) */
+            aspect-ratio: 9/16; 
+            max-height: 90vh;
+            width: auto;
+            
+            /* پدینگ‌های درصدی برای هل دادن محتوا به داخل کادر سفید */
+            /* بالا: حدود 30% برای رد کردن هدر "فرمان" */
+            padding-top: 32%; 
+            /* پایین: حدود 12% برای رد کردن حاشیه پایین */
+            padding-bottom: 12%;
+            /* چپ و راست: حدود 14% برای رد کردن حاشیه گل و مرغ */
+            padding-left: 14%;
+            padding-right: 14%;
         }
 
-        .playing-row {
-            background: rgba(255, 255, 255, 0.15);
-            border-right: 4px solid #10b981;
+        /* تنظیم ارتفاع لیست پخش */
+        .playlist-scroll {
+            scrollbar-width: thin;
+            scrollbar-color: #b45309 transparent;
         }
-        
-        /* انیمیشن برای کاور آلبوم در حال پخش */
+        .playlist-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+        .playlist-scroll::-webkit-scrollbar-thumb {
+            background-color: #b45309;
+            border-radius: 4px;
+        }
+
+        /* آیتم در حال پخش */
+        .playing-row {
+            background-color: rgba(180, 83, 9, 0.1); /* طلایی خیلی کم‌رنگ */
+            border-right: 3px solid #b45309; /* خط طلایی */
+        }
+
         .spin-slow {
             animation: spin 10s linear infinite;
         }
@@ -73,57 +102,62 @@
         }
     </style>
 </head>
-<body class="text-white flex items-center justify-center p-4">
+<body class="flex items-center justify-center p-2">
 
-    <div class="w-full max-w-md glass-panel rounded-3xl overflow-hidden shadow-2xl relative">
+    <!-- این دیو نقش قاب عکس را بازی می‌کند -->
+    <div class="frame-container w-full max-w-lg flex flex-col relative text-slate-800">
         
-        <!-- بخش هدر -->
-        <div class="p-6 text-center border-b border-white/10">
-            <h1 class="text-xl font-bold">پلی‌لیست گیت‌هاب</h1>
-            <p class="text-xs text-gray-300 mt-1">بروزرسانی زنده از فایل متنی</p>
-        </div>
-
-        <!-- بخش پلیر -->
-        <div class="p-6 flex flex-col items-center">
-            <!-- کاور موزیک (پیش‌فرض) -->
-            <div class="w-48 h-48 rounded-full bg-gradient-to-tr from-purple-500 to-pink-500 shadow-xl mb-6 flex items-center justify-center relative overflow-hidden ring-4 ring-white/10" id="albumArt">
-                <i data-lucide="music" class="w-16 h-16 text-white opacity-80"></i>
+        <!-- محتوای داخل کادر سفید -->
+        <div class="flex-1 flex flex-col h-full overflow-hidden">
+            
+            <!-- عنوان بالای پلیر -->
+            <div class="text-center mb-2">
+                <h1 class="text-lg font-bold text-slate-900">پلی‌لیست سنتی</h1>
             </div>
 
-            <!-- اطلاعات آهنگ -->
-            <h2 id="songTitle" class="text-2xl font-bold mb-1 text-center truncate w-full">در حال بارگذاری...</h2>
-            <p id="artistName" class="text-gray-300 text-sm mb-6 text-center">لطفا کمی صبر کنید</p>
+            <!-- بخش کاور و کنترل‌ها -->
+            <div class="flex flex-col items-center mb-4 px-2">
+                <!-- کاور موزیک -->
+                <div class="w-24 h-24 rounded-full border-4 border-amber-700/20 shadow-md mb-3 flex items-center justify-center relative overflow-hidden bg-slate-100" id="albumArt">
+                    <i data-lucide="music" class="w-10 h-10 text-amber-700 opacity-60"></i>
+                </div>
 
-            <!-- نوار پیشرفت -->
-            <div class="w-full mb-2 flex justify-between text-xs text-gray-400">
-                <span id="currentTime">0:00</span>
-                <span id="duration">0:00</span>
+                <!-- اطلاعات آهنگ -->
+                <h2 id="songTitle" class="text-lg font-bold text-slate-900 mb-0 w-full text-center truncate">در حال بارگذاری...</h2>
+                <p id="artistName" class="text-amber-700 text-xs mb-3 text-center">...</p>
+
+                <!-- نوار پیشرفت -->
+                <div class="w-full mb-1 flex justify-between text-[10px] text-slate-500 font-mono">
+                    <span id="currentTime">0:00</span>
+                    <span id="duration">0:00</span>
+                </div>
+                <input type="range" id="progressBar" value="0" class="w-full mb-4" disabled>
+
+                <!-- دکمه‌های کنترل -->
+                <div class="flex items-center justify-center gap-6 text-amber-900">
+                    <button id="prevBtn" class="hover:text-amber-600 transition active:scale-95">
+                        <i data-lucide="skip-back" class="w-6 h-6"></i>
+                    </button>
+                    
+                    <button id="playBtn" class="bg-amber-700 text-white rounded-full p-3 hover:bg-amber-800 transition shadow-lg active:scale-95">
+                        <i data-lucide="play" class="w-6 h-6 fill-current"></i>
+                    </button>
+                    
+                    <button id="nextBtn" class="hover:text-amber-600 transition active:scale-95">
+                        <i data-lucide="skip-forward" class="w-6 h-6"></i>
+                    </button>
+                </div>
             </div>
-            <input type="range" id="progressBar" value="0" class="w-full mb-6" disabled>
 
-            <!-- دکمه‌های کنترل -->
-            <div class="flex items-center justify-center gap-6">
-                <button id="prevBtn" class="hover:text-emerald-400 transition transform hover:scale-110">
-                    <i data-lucide="skip-back" class="w-8 h-8"></i>
-                </button>
-                
-                <button id="playBtn" class="bg-white text-gray-900 rounded-full p-4 hover:bg-emerald-400 hover:text-white transition shadow-lg transform hover:scale-105">
-                    <i data-lucide="play" class="w-8 h-8 fill-current"></i>
-                </button>
-                
-                <button id="nextBtn" class="hover:text-emerald-400 transition transform hover:scale-110">
-                    <i data-lucide="skip-forward" class="w-8 h-8"></i>
-                </button>
+            <!-- خط جداکننده تزیینی -->
+            <div class="border-t border-amber-700/20 w-3/4 mx-auto mb-2"></div>
+
+            <!-- لیست پخش -->
+            <div class="flex-1 overflow-y-auto playlist-scroll px-1">
+                <ul id="playlistContainer" class="space-y-1 pb-2">
+                    <li class="text-center text-xs text-slate-400 mt-4">در حال خواندن فایل...</li>
+                </ul>
             </div>
-        </div>
-
-        <!-- لیست پخش -->
-        <div class="bg-black/20 max-h-64 overflow-y-auto p-4 custom-scrollbar">
-            <h3 class="text-xs font-bold text-gray-400 mb-3 uppercase tracking-wider">لیست آهنگ‌ها</h3>
-            <ul id="playlistContainer" class="space-y-2">
-                <!-- آیتم‌ها توسط جاوااسکریپت پر می‌شوند -->
-                <li class="text-center text-sm text-gray-500">...</li>
-            </ul>
         </div>
 
         <!-- عنصر صوتی مخفی -->
@@ -131,10 +165,8 @@
     </div>
 
     <script>
-        // آیکون‌ها را فعال کن
         lucide.createIcons();
 
-        // متغیرهای اصلی
         const audio = document.getElementById('audioPlayer');
         const playBtn = document.getElementById('playBtn');
         const prevBtn = document.getElementById('prevBtn');
@@ -151,14 +183,9 @@
         let currentTrackIndex = 0;
         let isPlaying = false;
 
-        // --- بخش مهم: لود کردن فایل متنی با فال‌بک ---
         async function loadPlaylistFile() {
             try {
-                // اضافه کردن timestamp برای جلوگیری از کش
                 const timestamp = new Date().getTime();
-                
-                // تلاش برای دانلود فایل متنی
-                // نکته: اگر در محیطی باشیم که فایل وجود ندارد، به catch می‌رویم
                 const response = await fetch(`playlist.txt?t=${timestamp}`, {
                     cache: "no-store"
                 });
@@ -168,70 +195,57 @@
                 const text = await response.text();
                 parsePlaylist(text);
             } catch (error) {
-                console.warn("حالت پیش‌نمایش فعال شد (فایل playlist.txt پیدا نشد):", error);
-                
-                // لیست پخش پیش‌فرض (Fallback)
-                // این لیست فقط وقتی استفاده می‌شود که فایل اصلی در دسترس نباشد
+                console.warn("حالت پیش‌نمایش:", error);
                 const fallbackData = `
 https://dl.pmcmusic.tv/1402/09/Hayedeh%20-%20Saghi.mp3,ساقی,هایده
 https://cdn.musicgitar.ir/Music/Mahasti/320/Mahasti%20-%20Mosafer%20[320].mp3?src=musicgitar,مسافر,مهستی
                 `;
-                
                 parsePlaylist(fallbackData);
-                
-                // نمایش پیام در کنسول که بدانید از نسخه پشتیبان استفاده شده است
-                console.log("از لیست پخش پیش‌فرض استفاده شد.");
             }
         }
 
-        // تبدیل متن به آرایه پلی‌لیست
         function parsePlaylist(text) {
-            // فرض بر این است که هر خط به صورت: url,title,artist است
             const lines = text.split('\n');
             playlist = lines
                 .map(line => line.trim())
-                .filter(line => line.length > 0 && !line.startsWith('#')) // نادیده گرفتن خطوط خالی و کامنت
+                .filter(line => line.length > 0 && !line.startsWith('#'))
                 .map(line => {
-                    // جدا کردن با ویرگول (اگر ویرگول نبود، کل خط لینک است)
                     const parts = line.split(',');
                     return {
                         url: parts[0]?.trim(),
-                        title: parts[1]?.trim() || "آهنگ بدون نام",
+                        title: parts[1]?.trim() || "بدون نام",
                         artist: parts[2]?.trim() || "ناشناس"
                     };
                 });
 
             if (playlist.length > 0) {
                 renderPlaylistUI();
-                loadTrack(0, false); // آهنگ اول را لود کن اما پخش نکن
+                loadTrack(0, false);
             } else {
-                songTitle.innerText = "لیست خالی است";
+                songTitle.innerText = "لیست خالی";
                 artistName.innerText = "";
+                playlistContainer.innerHTML = '<li class="text-center text-xs text-red-500">آهنگی پیدا نشد</li>';
             }
         }
 
-        // نمایش لیست در UI
         function renderPlaylistUI() {
             playlistContainer.innerHTML = '';
             playlist.forEach((track, index) => {
                 const li = document.createElement('li');
-                li.className = `p-3 rounded-lg cursor-pointer flex items-center justify-between text-sm hover:bg-white/5 transition ${index === currentTrackIndex ? 'playing-row' : ''}`;
+                li.className = `p-2 rounded cursor-pointer flex items-center justify-between text-xs group hover:bg-amber-50 transition ${index === currentTrackIndex ? 'playing-row' : ''}`;
                 li.innerHTML = `
                     <div class="flex flex-col overflow-hidden">
-                        <span class="font-bold truncate">${track.title}</span>
-                        <span class="text-xs text-gray-400 truncate">${track.artist}</span>
+                        <span class="font-bold truncate text-slate-800 group-hover:text-amber-900">${track.title}</span>
+                        <span class="text-[10px] text-slate-500 truncate">${track.artist}</span>
                     </div>
-                    ${index === currentTrackIndex ? '<i data-lucide="bar-chart-2" class="w-4 h-4 text-emerald-400"></i>' : ''}
+                    ${index === currentTrackIndex ? '<i data-lucide="music-2" class="w-3 h-3 text-amber-700"></i>' : ''}
                 `;
-                li.onclick = () => {
-                    loadTrack(index, true);
-                };
+                li.onclick = () => loadTrack(index, true);
                 playlistContainer.appendChild(li);
             });
             lucide.createIcons();
         }
 
-        // لود کردن آهنگ
         function loadTrack(index, playImmediately) {
             currentTrackIndex = index;
             const track = playlist[index];
@@ -240,21 +254,19 @@ https://cdn.musicgitar.ir/Music/Mahasti/320/Mahasti%20-%20Mosafer%20[320].mp3?sr
             songTitle.innerText = track.title;
             artistName.innerText = track.artist;
             
-            // بروزرسانی استایل لیست
             renderPlaylistUI();
 
             if (playImmediately) {
                 playSong();
             } else {
-                pauseSong(); // فقط آماده‌سازی
+                pauseSong();
             }
         }
 
-        // توابع پخش و توقف
         function playSong() {
             isPlaying = true;
-            audio.play().catch(e => console.log("خطای پخش خودکار:", e));
-            playBtn.innerHTML = '<i data-lucide="pause" class="w-8 h-8 fill-current"></i>';
+            audio.play().catch(e => console.log("خطا:", e));
+            playBtn.innerHTML = '<i data-lucide="pause" class="w-6 h-6 fill-current"></i>';
             albumArt.classList.add('spin-slow');
             albumArt.classList.remove('paused-anim');
             lucide.createIcons();
@@ -263,7 +275,7 @@ https://cdn.musicgitar.ir/Music/Mahasti/320/Mahasti%20-%20Mosafer%20[320].mp3?sr
         function pauseSong() {
             isPlaying = false;
             audio.pause();
-            playBtn.innerHTML = '<i data-lucide="play" class="w-8 h-8 fill-current"></i>';
+            playBtn.innerHTML = '<i data-lucide="play" class="w-6 h-6 fill-current"></i>';
             albumArt.classList.add('paused-anim');
             lucide.createIcons();
         }
@@ -275,7 +287,7 @@ https://cdn.musicgitar.ir/Music/Mahasti/320/Mahasti%20-%20Mosafer%20[320].mp3?sr
 
         function nextSong() {
             let nextIndex = currentTrackIndex + 1;
-            if (nextIndex >= playlist.length) nextIndex = 0; // لوپ به اول
+            if (nextIndex >= playlist.length) nextIndex = 0;
             loadTrack(nextIndex, true);
         }
 
@@ -285,47 +297,38 @@ https://cdn.musicgitar.ir/Music/Mahasti/320/Mahasti%20-%20Mosafer%20[320].mp3?sr
             loadTrack(prevIndex, true);
         }
 
-        // بروزرسانی نوار پیشرفت
         audio.addEventListener('timeupdate', (e) => {
             const { duration, currentTime } = e.srcElement;
             if (isNaN(duration)) return;
             
             const progressPercent = (currentTime / duration) * 100;
             progressBar.value = progressPercent;
-            
-            // فرمت زمان
             currentTimeEl.innerText = formatTime(currentTime);
             durationEl.innerText = formatTime(duration);
         });
 
-        // کلیک روی نوار پیشرفت
         progressBar.addEventListener('input', () => {
             const duration = audio.duration;
             audio.currentTime = (progressBar.value / 100) * duration;
         });
         
-        // فعال‌سازی نوار پیشرفت وقتی متادیتای آهنگ لود شد
         audio.addEventListener('loadedmetadata', () => {
             progressBar.disabled = false;
             durationEl.innerText = formatTime(audio.duration);
         });
 
-        // رفتن به آهنگ بعدی وقتی آهنگ تمام شد
         audio.addEventListener('ended', nextSong);
 
-        // فرمت کردن زمان (تبدیل ثانیه به دقیقه:ثانیه)
         function formatTime(seconds) {
             const min = Math.floor(seconds / 60);
             const sec = Math.floor(seconds % 60);
             return `${min}:${sec < 10 ? '0' + sec : sec}`;
         }
 
-        // رویداد دکمه‌ها
         playBtn.addEventListener('click', togglePlay);
         nextBtn.addEventListener('click', nextSong);
         prevBtn.addEventListener('click', prevSong);
 
-        // شروع برنامه
         loadPlaylistFile();
 
     </script>
