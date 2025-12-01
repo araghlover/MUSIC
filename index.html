@@ -17,14 +17,12 @@
         
         body {
             font-family: 'Vazirmatn', sans-serif;
-            /* رنگ پس‌زمینه کل صفحه (بیرون قاب) - سرمه‌ای تیره هماهنگ با قاب */
             background-color: #0f172a;
             background-image: radial-gradient(#1e293b 1px, transparent 1px);
             background-size: 20px 20px;
             min-height: 100vh;
         }
 
-        /* تنظیمات اسلایدر (Seek Bar) با رنگ طلایی */
         input[type=range] {
             -webkit-appearance: none;
             background: transparent;
@@ -34,7 +32,7 @@
             height: 16px;
             width: 16px;
             border-radius: 50%;
-            background: #b45309; /* طلایی تیره */
+            background: #b45309;
             margin-top: -6px;
             cursor: pointer;
             box-shadow: 0 0 5px rgba(180, 83, 9, 0.5);
@@ -43,38 +41,26 @@
             width: 100%;
             height: 4px;
             cursor: pointer;
-            background: #e2e8f0; /* طوسی روشن برای زمینه سفید */
+            background: #e2e8f0;
             border-radius: 2px;
         }
 
-        /* کانتینر اصلی که عکس قاب را نگه می‌دارد */
-        .frame-container {
-            /* نام فایل عکس باید bg.jpg باشد */
-            background-image: url('bg.jpg'); 
-            background-size: 100% 100%;
-            background-repeat: no-repeat;
-            background-position: center;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            
-            /* نسبت تصویر قاب (تقریباً 3 به 5) */
-            aspect-ratio: 9/16; 
-            max-height: 90vh;
-            width: auto;
-            
-            /* پدینگ‌های درصدی برای هل دادن محتوا به داخل کادر سفید */
-            /* بالا: حدود 30% برای رد کردن هدر "فرمان" */
-            padding-top: 32%; 
-            /* پایین: حدود 12% برای رد کردن حاشیه پایین */
-            padding-bottom: 12%;
-            /* چپ و راست: حدود 14% برای رد کردن حاشیه گل و مرغ */
-            padding-left: 14%;
-            padding-right: 14%;
+        /* کانتینر اصلی پلیر (بدون عکس قاب) */
+        .player-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* تنظیم ارتفاع لیست پخش */
         .playlist-scroll {
             scrollbar-width: thin;
             scrollbar-color: #b45309 transparent;
+            max-height: 250px; /* ارتفاع لیست پخش */
         }
         .playlist-scroll::-webkit-scrollbar {
             width: 4px;
@@ -84,83 +70,120 @@
             border-radius: 4px;
         }
 
-        /* آیتم در حال پخش */
         .playing-row {
-            background-color: rgba(180, 83, 9, 0.1); /* طلایی خیلی کم‌رنگ */
-            border-right: 3px solid #b45309; /* خط طلایی */
+            background-color: rgba(180, 83, 9, 0.1);
+            border-right: 3px solid #b45309;
         }
 
+        /* انیمیشن چرخش */
         .spin-slow {
-            animation: spin 10s linear infinite;
+            animation: spin 4s linear infinite;
         }
         @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            from { transform: translateY(-50%) rotate(0deg); }
+            to { transform: translateY(-50%) rotate(360deg); }
         }
         .paused-anim {
             animation-play-state: paused;
         }
+
+        /* استایل هدر و دیسک */
+        .header-container {
+            /* تصویر بکگراند هدر */
+            background-image: url('bg.png'); 
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 120px; /* ارتفاع هدر */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* افکت سایه روی هدر برای خوانایی متن */
+        .header-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.6));
+        }
+
+        .rotating-disc {
+            position: absolute;
+            top: 50%;
+            right: -20px; /* دیسک کمی از کادر بیرون بزند یا لبه باشد */
+            width: 100px; /* سایز دیسک بزرگتر */
+            height: 100px;
+            border-radius: 50%;
+            filter: drop-shadow(-2px 4px 6px rgba(0,0,0,0.5)); 
+            transform: translateY(-50%);
+            z-index: 20;
+        }
+        
+        .header-title {
+            position: relative;
+            z-index: 30;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
     </style>
 </head>
-<body class="flex items-center justify-center p-2">
+<body class="flex items-center justify-center p-4 min-h-screen">
 
-    <!-- این دیو نقش قاب عکس را بازی می‌کند -->
-    <div class="frame-container w-full max-w-lg flex flex-col relative text-slate-800">
+    <div class="player-card flex flex-col relative text-slate-800">
         
-        <!-- محتوای داخل کادر سفید -->
-        <div class="flex-1 flex flex-col h-full overflow-hidden">
+        <!-- هدر با بکگراند bg.png و دیسک safhe.png -->
+        <div class="header-container">
+            <div class="header-overlay"></div>
+            <h1 class="header-title">نوای عشق</h1>
+            <!-- تصویر دیسک -->
+            <img src="safhe.png" alt="Vinyl Disc" class="rotating-disc paused-anim" id="vinylDisc">
+        </div>
+
+        <!-- بدنه پلیر -->
+        <div class="flex flex-col items-center p-6 bg-slate-50">
             
-            <!-- عنوان بالای پلیر -->
-            <div class="text-center mb-2">
-                <h1 class="text-lg font-bold text-slate-900">پلی‌لیست سنتی</h1>
+            <!-- اطلاعات آهنگ -->
+            <div class="text-center w-full mb-6">
+                <h2 id="songTitle" class="text-xl font-bold text-slate-900 mb-1 w-full truncate">انتخاب آهنگ...</h2>
+                <p id="artistName" class="text-amber-700 text-sm font-medium">...</p>
             </div>
 
-            <!-- بخش کاور و کنترل‌ها -->
-            <div class="flex flex-col items-center mb-4 px-2">
-                <!-- کاور موزیک -->
-                <div class="w-24 h-24 rounded-full border-4 border-amber-700/20 shadow-md mb-3 flex items-center justify-center relative overflow-hidden bg-slate-100" id="albumArt">
-                    <i data-lucide="music" class="w-10 h-10 text-amber-700 opacity-60"></i>
-                </div>
-
-                <!-- اطلاعات آهنگ -->
-                <h2 id="songTitle" class="text-lg font-bold text-slate-900 mb-0 w-full text-center truncate">در حال بارگذاری...</h2>
-                <p id="artistName" class="text-amber-700 text-xs mb-3 text-center">...</p>
-
-                <!-- نوار پیشرفت -->
-                <div class="w-full mb-1 flex justify-between text-[10px] text-slate-500 font-mono">
-                    <span id="currentTime">0:00</span>
-                    <span id="duration">0:00</span>
-                </div>
-                <input type="range" id="progressBar" value="0" class="w-full mb-4" disabled>
-
-                <!-- دکمه‌های کنترل -->
-                <div class="flex items-center justify-center gap-6 text-amber-900">
-                    <button id="prevBtn" class="hover:text-amber-600 transition active:scale-95">
-                        <i data-lucide="skip-back" class="w-6 h-6"></i>
-                    </button>
-                    
-                    <button id="playBtn" class="bg-amber-700 text-white rounded-full p-3 hover:bg-amber-800 transition shadow-lg active:scale-95">
-                        <i data-lucide="play" class="w-6 h-6 fill-current"></i>
-                    </button>
-                    
-                    <button id="nextBtn" class="hover:text-amber-600 transition active:scale-95">
-                        <i data-lucide="skip-forward" class="w-6 h-6"></i>
-                    </button>
-                </div>
+            <!-- نوار پیشرفت -->
+            <div class="w-full mb-2 flex justify-between text-[10px] text-slate-500 font-mono font-bold">
+                <span id="currentTime">0:00</span>
+                <span id="duration">0:00</span>
             </div>
+            <input type="range" id="progressBar" value="0" class="w-full mb-8" disabled>
 
-            <!-- خط جداکننده تزیینی -->
-            <div class="border-t border-amber-700/20 w-3/4 mx-auto mb-2"></div>
+            <!-- دکمه‌های کنترل -->
+            <div class="flex items-center justify-center gap-8 text-amber-900 w-full">
+                <button id="prevBtn" class="hover:text-amber-600 transition active:scale-95 p-2">
+                    <i data-lucide="skip-back" class="w-8 h-8"></i>
+                </button>
+                
+                <button id="playBtn" class="bg-gradient-to-br from-amber-600 to-amber-800 text-white rounded-full p-5 hover:shadow-xl hover:scale-105 transition active:scale-95 shadow-lg border-4 border-amber-100">
+                    <i data-lucide="play" class="w-8 h-8 fill-current ml-1"></i>
+                </button>
+                
+                <button id="nextBtn" class="hover:text-amber-600 transition active:scale-95 p-2">
+                    <i data-lucide="skip-forward" class="w-8 h-8"></i>
+                </button>
+            </div>
+        </div>
 
-            <!-- لیست پخش -->
-            <div class="flex-1 overflow-y-auto playlist-scroll px-1">
-                <ul id="playlistContainer" class="space-y-1 pb-2">
-                    <li class="text-center text-xs text-slate-400 mt-4">در حال خواندن فایل...</li>
+        <!-- لیست پخش -->
+        <div class="bg-white border-t border-slate-200 p-2">
+            <div class="playlist-scroll overflow-y-auto px-2 pb-2">
+                <h3 class="text-xs font-bold text-slate-400 mb-2 mt-2 px-2">لیست پخش</h3>
+                <ul id="playlistContainer" class="space-y-1">
+                    <li class="text-center text-xs text-slate-400 py-4">در حال خواندن فایل...</li>
                 </ul>
             </div>
         </div>
 
-        <!-- عنصر صوتی مخفی -->
         <audio id="audioPlayer"></audio>
     </div>
 
@@ -177,7 +200,7 @@
         const currentTimeEl = document.getElementById('currentTime');
         const durationEl = document.getElementById('duration');
         const playlistContainer = document.getElementById('playlistContainer');
-        const albumArt = document.getElementById('albumArt');
+        const vinylDisc = document.getElementById('vinylDisc');
 
         let playlist = [];
         let currentTrackIndex = 0;
@@ -232,13 +255,13 @@ https://cdn.musicgitar.ir/Music/Mahasti/320/Mahasti%20-%20Mosafer%20[320].mp3?sr
             playlistContainer.innerHTML = '';
             playlist.forEach((track, index) => {
                 const li = document.createElement('li');
-                li.className = `p-2 rounded cursor-pointer flex items-center justify-between text-xs group hover:bg-amber-50 transition ${index === currentTrackIndex ? 'playing-row' : ''}`;
+                li.className = `p-3 rounded-lg cursor-pointer flex items-center justify-between text-xs group hover:bg-amber-50 transition border border-transparent hover:border-amber-100 ${index === currentTrackIndex ? 'playing-row' : ''}`;
                 li.innerHTML = `
-                    <div class="flex flex-col overflow-hidden">
-                        <span class="font-bold truncate text-slate-800 group-hover:text-amber-900">${track.title}</span>
-                        <span class="text-[10px] text-slate-500 truncate">${track.artist}</span>
+                    <div class="flex flex-col overflow-hidden w-full">
+                        <span class="font-bold truncate text-slate-800 text-sm group-hover:text-amber-900">${track.title}</span>
+                        <span class="text-xs text-slate-500 truncate mt-0.5">${track.artist}</span>
                     </div>
-                    ${index === currentTrackIndex ? '<i data-lucide="music-2" class="w-3 h-3 text-amber-700"></i>' : ''}
+                    ${index === currentTrackIndex ? '<div class="mr-2"><div class="w-2 h-2 rounded-full bg-amber-600 animate-pulse"></div></div>' : ''}
                 `;
                 li.onclick = () => loadTrack(index, true);
                 playlistContainer.appendChild(li);
@@ -266,17 +289,17 @@ https://cdn.musicgitar.ir/Music/Mahasti/320/Mahasti%20-%20Mosafer%20[320].mp3?sr
         function playSong() {
             isPlaying = true;
             audio.play().catch(e => console.log("خطا:", e));
-            playBtn.innerHTML = '<i data-lucide="pause" class="w-6 h-6 fill-current"></i>';
-            albumArt.classList.add('spin-slow');
-            albumArt.classList.remove('paused-anim');
+            playBtn.innerHTML = '<i data-lucide="pause" class="w-8 h-8 fill-current"></i>';
+            vinylDisc.classList.add('spin-slow'); 
+            vinylDisc.classList.remove('paused-anim');
             lucide.createIcons();
         }
 
         function pauseSong() {
             isPlaying = false;
             audio.pause();
-            playBtn.innerHTML = '<i data-lucide="play" class="w-6 h-6 fill-current"></i>';
-            albumArt.classList.add('paused-anim');
+            playBtn.innerHTML = '<i data-lucide="play" class="w-8 h-8 fill-current ml-1"></i>';
+            vinylDisc.classList.add('paused-anim');
             lucide.createIcons();
         }
 
