@@ -1,80 +1,80 @@
-https://dl6.tarikhema.org/music/m/mahasti/Mahasti-Meykhooneh-Bi-Sharab-128.mp3,Meykhooneh,Mahasti
-https://dl6.tarikhema.org/music/m/mahasti/Mahasti-Jodaei-128.mp3,Jodaei,Mahasti
-https://dl6.tarikhema.org/music/m/mahasti/Mahasti-Delam-128.mp3,Delam,Mahasti
-https://dl6.tarikhema.org/music/m/mahasti/Mahasti-Ashena-128.mp3,Ashena,Mahasti
-https://dl6.tarikhema.org/music/m/mahasti/Mahasti-Khoobe-Man-128.mp3,Khoobe,Mahasti
-https://dl6.tarikhema.org/music/m/mahasti/Mahasti-Dota-Cheshmoon-128.mp3,Dota,Mahasti
-https://dl6.tarikhema.org/music/m/mahasti/Mahasti-Fadat-Sham-128.mp3,Fadat,Mahasti
-https://dl6.tarikhema.org/music/m/mahasti/Mahasti-Ashofteh-128.mp3,Ashofteh,Mahasti
-https://dl6.tarikhema.org/music/m/mahasti/Mahasti-Peymaneh-128.mp3,Peymaneh,Mahasti
-https://dl6.tarikhema.org/music/m/mahasti/Mahasti-Dige-Basame-128.mp3,Dige,Mahasti
-https://dl6.tarikhema.org/music/m/mahasti/Mahasti-Azize-Rafteh-128.mp3,Azize,Mahasti
-https://dl6.tarikhema.org/music/m/mahasti/Mahasti-Shakhe-Nabat-128.mp3,Shakhe,Mahasti
-https://dl6.tarikhema.org/music/m/mahasti/Mahasti-Bogzar-128.mp3,Bogzar,Mahasti
-https://dl6.tarikhema.org/music/m/mahasti/Mahasti-Del-Az-To-Delgireh-128.mp3,Del,Mahasti
-https://dl6.tarikhema.org/music/m/mahasti/Mahasti-Namiri-Elahi-128.mp3,Namiri,Mahasti
-https://dl6.tarikhema.org/music/m/mahasti/Mahasti-Delam-Tange-128.mp3,Delam,Mahasti
-https://dl6.tarikhema.org/music/m/mahasti/Mahasti-To-Bayad-Bemani-128.mp3,To,Mahasti
-https://dl6.tarikhema.org/music/m/mahasti/Mahasti-Magiresh-AZ-Man-128.mp3,Magiresh,Mahasti
-https://dl6.tarikhema.org/music/m/mahasti/Mahasti-Nazi-Nazi-128.mp3,Nazi,Mahasti
-https://dl6.tarikhema.org/music/m/mahasti/Mahasti-Bia-Benevisim-128.mp3,Bia,Mahasti
-https://dl6.tarikhema.org/music/e/ebi/Ebi-Be-Salamatit-128.mp3,Be,Ebi
-https://dl6.tarikhema.org/music/e/ebi/Ebi-Zakhme-Namarei-128.mp3,Zakhme,Ebi
-https://dl6.tarikhema.org/music/e/ebi/Ebi-Do-Panjareh-128.mp3,Do,Ebi
-https://dl6.tarikhema.org/music/e/ebi/Ebi-Delbar-128.mp3,Delbar,Ebi
-https://dl6.tarikhema.org/music/e/ebi/Ebi-Pooste-Shir-128.mp3,Pooste,Ebi
-https://dl6.tarikhema.org/music/e/ebi/Ebi-Nafas-Nafas-128.mp3,Nafas,Ebi
-https://dl6.tarikhema.org/music/e/ebi/Ebi-Ghalbe-Ghaap-128.mp3,Ghalbe,Ebi
-https://dl6.tarikhema.org/music/e/ebi/Ebi-Jahane-Bedoone-To-128.mp3,Jahane,Ebi
-https://dl6.tarikhema.org/music/e/ebi/Ebi-Atre-To-128.mp3,Atre,Ebi
-https://dl6.tarikhema.org/music/e/ebi/Ebi-Ba-To-128.mp3,Ba,Ebi
-https://dl6.tarikhema.org/music/e/ebi/Ebi-Hamsafar-128.mp3,Hamsafar,Ebi
-https://dl6.tarikhema.org/music/e/ebi/Ebi-Jane-Javani-128.mp3,Jane,Ebi
-https://dl6.tarikhema.org/music/e/ebi/Ebi-In-Akharin-Bare-128.mp3,In,Ebi
-https://dl6.tarikhema.org/music/e/ebi/Ebi-Delpoosh-128.mp3,Delpoosh,Ebi
-https://dl6.tarikhema.org/music/e/ebi/Ebi-Derakht-128.mp3,Derakht,Ebi
-https://dl6.tarikhema.org/music/e/ebi/Ebi-Khali-128.mp3,Khali,Ebi
-https://dl6.tarikhema.org/music/e/ebi/Ebi-Khanom-Gol-128.mp3,Khanom,Ebi
-https://dl6.tarikhema.org/music/e/ebi/Ebi-Navazesh-128.mp3,Navazesh,Ebi
-https://dl6.tarikhema.org/music/e/ebi/Ebi-Royaye-Ma-128.mp3,Royaye,Ebi
-https://dl6.tarikhema.org/music/e/ebi/Ebi-Harighe-Sabz-128.mp3,Harighe,Ebi
-https://dl6.tarikhema.org/music/h/haydeh/Haydeh-Soghati-128.mp3,Soghati,Haydeh
-https://dl6.tarikhema.org/music/h/haydeh/Haydeh-Sia-Cheshmoon-128.mp3,Sia,Haydeh
-https://dl6.tarikhema.org/music/h/haydeh/Haydeh-Shabe-Eshgh-128.mp3,Shabe,Haydeh
-https://dl6.tarikhema.org/music/h/haydeh/Haydeh-Ravi-128.mp3,Ravi,Haydeh
-https://dl6.tarikhema.org/music/h/haydeh/Haydeh-Delam-Mikhad-128.mp3,Delam,Haydeh
-https://dl6.tarikhema.org/music/h/haydeh/Haydeh-Asire-To-128.mp3,Asire,Haydeh
-https://dl6.tarikhema.org/music/h/haydeh/Haydeh-Saghi-128.mp3,Saghi,Haydeh
-https://dl6.tarikhema.org/music/h/haydeh/Haydeh-Nagoo-Nemiyam-128.mp3,Nagoo,Haydeh
-https://dl6.tarikhema.org/music/h/haydeh/Haydeh-Tabe-Eshgh-128.mp3,Tabe,Haydeh
-https://dl6.tarikhema.org/music/h/haydeh/Haydeh-Bezan-Tar-128.mp3,Bezan,Haydeh
-https://dl6.tarikhema.org/music/h/haydeh/Haydeh-Omadenet-Mahale-128.mp3,Omadenet,Haydeh
-https://dl6.tarikhema.org/music/h/haydeh/Haydeh-Sogand-128.mp3,Sogand,Haydeh
-https://dl6.tarikhema.org/music/h/haydeh/Haydeh-Parishoon-128.mp3,Parishoon,Haydeh
-https://dl6.tarikhema.org/music/h/haydeh/Haydeh-Badeh-Forosh-128.mp3,Badeh,Haydeh
-https://dl6.tarikhema.org/music/h/haydeh/Haydeh-Bagoo-Che-Konam-128.mp3,Bagoo,Haydeh
-https://dl6.tarikhema.org/music/h/haydeh/Haydeh-Dastaye-To-128.mp3,Dastaye,Haydeh
-https://dl6.tarikhema.org/music/h/haydeh/Haydeh-Hamkhooneh-128.mp3,Hamkhooneh,Haydeh
-https://dl6.tarikhema.org/music/h/haydeh/Haydeh-In-Rooza-128.mp3,In,Haydeh
-https://dl6.tarikhema.org/music/h/haydeh/Haydeh-Mehraboone-Man-128.mp3,Mehraboone,Haydeh
-https://dl6.tarikhema.org/music/h/haydeh/Haydeh-Gole-Sang-128.mp3,Gole,Haydeh
-https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-Tamasha-128.mp3,Aghili,Shadmehr
-https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-Tardid-128.mp3,Aghili,Shadmehr
-https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-Baroon-Delam-Khast-128.mp3,Aghili,Shadmehr
-https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-Daste-Man-Nist-128.mp3,Aghili,Shadmehr
-https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-Batel-128.mp3,Aghili,Shadmehr
-https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-Taghdir-128.mp3,Aghili,Shadmehr
-https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-Entekhab-128.mp3,Aghili,Shadmehr
-https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-Hese-Khobiye-128.mp3,Aghili,Shadmehr
-https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-Ghazi-128.mp3,Aghili,Shadmehr
-https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-Bi-Ehsas-128.mp3,Aghili,Shadmehr
-https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-Avaz-Nemishi-128.mp3,Aghili,Shadmehr
-https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-Hamishegi-128.mp3,Aghili,Shadmehr
-https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-Rooze-Sard-128.mp3,Aghili,Shadmehr
-https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-Sarnevesht-128.mp3,Aghili,Shadmehr
-https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-Tasvir-128.mp3,Aghili,Shadmehr
-https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-Door-Shdi-128.mp3,Aghili,Shadmehr
-https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-Khabe-Khosh-128.mp3,Aghili,Shadmehr
-https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-Ghalbe-Man-128.mp3,Aghili,Shadmehr
-https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-To-Bi-Man-128.mp3,Aghili,Shadmehr
-https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-Sedam-Bezan-128.mp3,Aghili,Shadmehr
+https://dl6.tarikhema.org/music/m/mahasti/Mahasti-Meykhooneh-Bi-Sharab-128.mp3,%D9%85%DB%8C%D8%AE%D9%88%D9%86%D9%87 بی شراب,مهستی
+https://dl6.tarikhema.org/music/m/mahasti/Mahasti-Jodaei-128.mp3,%D8%AC%D8%AF%D8%A7%DB%8C%DB%8C,%D9%85%D9%87%D8%B3%D8%AA%DB%8C
+https://dl6.tarikhema.org/music/m/mahasti/Mahasti-Delam-128.mp3,%D8%AF%D9%84%D9%85,%D9%85%D9%87%D8%B3%D8%AA%DB%8C
+https://dl6.tarikhema.org/music/m/mahasti/Mahasti-Ashena-128.mp3,%D8%A2%D8%B4%D9%86%D8%A7,%D9%85%D9%87%D8%B3%D8%AA%DB%8C
+https://dl6.tarikhema.org/music/m/mahasti/Mahasti-Khoobe-Man-128.mp3,%D8%AE%D9%88%D8%A8 من,مهستی
+https://dl6.tarikhema.org/music/m/mahasti/Mahasti-Dota-Cheshmoon-128.mp3,%D8%AF%D9%88 تا چشمون,مهستی
+https://dl6.tarikhema.org/music/m/mahasti/Mahasti-Fadat-Sham-128.mp3,%D9%81%D8%AF%D8%A7%D8%AA شم,مهستی
+https://dl6.tarikhema.org/music/m/mahasti/Mahasti-Ashofteh-128.mp3,%D8%A2%D8%B4%D9%81%D8%AA%D9%87,%D9%85%D9%87%D8%B3%D8%AA%DB%8C
+https://dl6.tarikhema.org/music/m/mahasti/Mahasti-Peymaneh-128.mp3,%D9%BE%DB%8C%D9%85%D8%A7%D9%86%D9%87,%D9%85%D9%87%D8%B3%D8%AA%DB%8C
+https://dl6.tarikhema.org/music/m/mahasti/Mahasti-Dige-Basame-128.mp3,%D8%AF%DB%8C%DA%AF%D9%87 بسمه,مهستی
+https://dl6.tarikhema.org/music/m/mahasti/Mahasti-Azize-Rafteh-128.mp3,%D8%B9%D8%B2%DB%8C%D8%B2 رفته,مهستی
+https://dl6.tarikhema.org/music/m/mahasti/Mahasti-Shakhe-Nabat-128.mp3,%D8%B4%D8%A7%D8%AE%D9%87 نبات,مهستی
+https://dl6.tarikhema.org/music/m/mahasti/Mahasti-Bogzar-128.mp3,%D8%A8%DA%AF%D8%B0%D8%B1,%D9%85%D9%87%D8%B3%D8%AA%DB%8C
+https://dl6.tarikhema.org/music/m/mahasti/Mahasti-Del-Az-To-Delgireh-128.mp3,%D8%AF%D9%84 از تو دلگیره,مهستی
+https://dl6.tarikhema.org/music/m/mahasti/Mahasti-Namiri-Elahi-128.mp3,%D9%86%D9%85%DB%8C%D8%B1%DB%8C الهی,مهستی
+https://dl6.tarikhema.org/music/m/mahasti/Mahasti-Delam-Tange-128.mp3,%D8%AF%D9%84%D9%85 تنگه,مهستی
+https://dl6.tarikhema.org/music/m/mahasti/Mahasti-To-Bayad-Bemani-128.mp3,%D8%AA%D9%88 باید بمانی,مهستی
+https://dl6.tarikhema.org/music/m/mahasti/Mahasti-Magiresh-AZ-Man-128.mp3,%D9%85%DA%AF%DB%8C%D8%B1%D8%B4 از من,مهستی
+https://dl6.tarikhema.org/music/m/mahasti/Mahasti-Nazi-Nazi-128.mp3,%D9%86%D8%A7%D8%B2%DB%8C نازی,مهستی
+https://dl6.tarikhema.org/music/m/mahasti/Mahasti-Bia-Benevisim-128.mp3,%D8%A8%DB%8C%D8%A7 بنویسیم,مهستی
+https://dl6.tarikhema.org/music/e/ebi/Ebi-Be-Salamatit-128.mp3,%D8%A8%D9%87 سلامتیت,ابی
+https://dl6.tarikhema.org/music/e/ebi/Ebi-Zakhme-Namarei-128.mp3,%D8%B2%D8%AE%D9%85 نامرئی,ابی
+https://dl6.tarikhema.org/music/e/ebi/Ebi-Do-Panjareh-128.mp3,%D8%AF%D9%88 پنجره,ابی
+https://dl6.tarikhema.org/music/e/ebi/Ebi-Delbar-128.mp3,%D8%AF%D9%84%D8%A8%D8%B1,%D8%A7%D8%A8%DB%8C
+https://dl6.tarikhema.org/music/e/ebi/Ebi-Pooste-Shir-128.mp3,%D9%BE%D9%88%D8%B3%D8%AA شیر,ابی
+https://dl6.tarikhema.org/music/e/ebi/Ebi-Nafas-Nafas-128.mp3,%D9%86%D9%81%D8%B3 نفس,ابی
+https://dl6.tarikhema.org/music/e/ebi/Ebi-Ghalbe-Ghaap-128.mp3,%D9%82%D9%84%D8%A8 قاپ,ابی
+https://dl6.tarikhema.org/music/e/ebi/Ebi-Jahane-Bedoone-To-128.mp3,%D8%AC%D9%87%D8%A7%D9%86 بدون تو,ابی
+https://dl6.tarikhema.org/music/e/ebi/Ebi-Atre-To-128.mp3,%D8%B9%D8%B7%D8%B1 تو,ابی
+https://dl6.tarikhema.org/music/e/ebi/Ebi-Ba-To-128.mp3,%D8%A8%D8%A7 تو,ابی
+https://dl6.tarikhema.org/music/e/ebi/Ebi-Hamsafar-128.mp3,%D9%87%D9%85%D8%B3%D9%81%D8%B1,%D8%A7%D8%A8%DB%8C
+https://dl6.tarikhema.org/music/e/ebi/Ebi-Jane-Javani-128.mp3,%D8%AC%D8%A7%D9%86 جوانی,ابی
+https://dl6.tarikhema.org/music/e/ebi/Ebi-In-Akharin-Bare-128.mp3,%D8%A7%DB%8C%D9%86 آخرین باره,ابی
+https://dl6.tarikhema.org/music/e/ebi/Ebi-Delpoosh-128.mp3,%D8%AF%D9%84%D9%BE%D9%88%D8%B4,%D8%A7%D8%A8%DB%8C
+https://dl6.tarikhema.org/music/e/ebi/Ebi-Derakht-128.mp3,%D8%AF%D8%B1%D8%AE%D8%AA,%D8%A7%D8%A8%DB%8C
+https://dl6.tarikhema.org/music/e/ebi/Ebi-Khali-128.mp3,%D8%AE%D8%A7%D9%84%DB%8C,%D8%A7%D8%A8%DB%8C
+https://dl6.tarikhema.org/music/e/ebi/Ebi-Khanom-Gol-128.mp3,%D8%AE%D8%A7%D9%86%D9%88%D9%85 خانم گل,ابی
+https://dl6.tarikhema.org/music/e/ebi/Ebi-Navazesh-128.mp3,%D9%86%D9%88%D8%A7%D8%B2%D8%B4,%D8%A7%D8%A8%DB%8C
+https://dl6.tarikhema.org/music/e/ebi/Ebi-Royaye-Ma-128.mp3,%D8%B1%D9%88%DB%8C%D8%A7%DB%8C ما,ابی
+https://dl6.tarikhema.org/music/e/ebi/Ebi-Harighe-Sabz-128.mp3,%D8%AD%D8%B1%DB%8C%D9%82 سبز,ابی
+https://dl6.tarikhema.org/music/h/haydeh/Haydeh-Soghati-128.mp3,%D8%B3%D9%88%D8%BA%D8%A7%D8%AA%DB%8C,%D9%87%D8%A7%DB%8C%D8%AF%D9%87
+https://dl6.tarikhema.org/music/h/haydeh/Haydeh-Sia-Cheshmoon-128.mp3,%D8%B3%DB%8C%D8%A7%D9%87 سیا چشمون,هایده
+https://dl6.tarikhema.org/music/h/haydeh/Haydeh-Shabe-Eshgh-128.mp3,%D8%B4%D8%A8 شب عشق,هایده
+https://dl6.tarikhema.org/music/h/haydeh/Haydeh-Ravi-128.mp3,%D8%B1%D8%A7%D9%88%DB%8C,%D9%87%D8%A7%DB%8C%D8%AF%D9%87
+https://dl6.tarikhema.org/music/h/haydeh/Haydeh-Delam-Mikhad-128.mp3,%D8%AF%D9%84%D9%85 دلم میخواد,هایده
+https://dl6.tarikhema.org/music/h/haydeh/Haydeh-Asire-To-128.mp3,%D8%A7%D8%B3%DB%8C%D8%B1 تو,هایده
+https://dl6.tarikhema.org/music/h/haydeh/Haydeh-Saghi-128.mp3,ساقی,هایده
+https://dl6.tarikhema.org/music/h/haydeh/Haydeh-Nagoo-Nemiyam-128.mp3,%D9%86%DA%AF%D9%88 نگو نمیام,هایده
+https://dl6.tarikhema.org/music/h/haydeh/Haydeh-Tabe-Eshgh-128.mp3,%D8%AA%D8%A8 تب عشق,هایده
+https://dl6.tarikhema.org/music/h/haydeh/Haydeh-Bezan-Tar-128.mp3,%D8%A8%D8%B2%D9%86 بزن تار,هایده
+https://dl6.tarikhema.org/music/h/haydeh/Haydeh-Omadenet-Mahale-128.mp3,%D8%A7%D9%88%D9%85%D8%AF%D9%86%D8%AA اومدنت محاله,هایده
+https://dl6.tarikhema.org/music/h/haydeh/Haydeh-Sogand-128.mp3,%D8%B3%D9%88%DA%AF%D9%86%D8%AF,%D9%87%D8%A7%DB%8C%D8%AF%D9%87
+https://dl6.tarikhema.org/music/h/haydeh/Haydeh-Parishoon-128.mp3,%D9%BE%D8%B1%DB%8C%D8%B4%D9%88%D9%86,%D9%87%D8%A7%DB%8C%D8%AF%D9%87
+https://dl6.tarikhema.org/music/h/haydeh/Haydeh-Badeh-Forosh-128.mp3,%D8%A8%D8%A7%D8%AF%D9%8 باده فروش,هایده
+https://dl6.tarikhema.org/music/h/haydeh/Haydeh-Bagoo-Che-Konam-128.mp3,%D8%A8%DA%AF%D9%88 بگو چه کنم,هایده
+https://dl6.tarikhema.org/music/h/haydeh/Haydeh-Dastaye-To-128.mp3,%D8%AF%D8%B3%D8%AA%D8%A7%DB%8C دستای تو,هایده
+https://dl6.tarikhema.org/music/h/haydeh/Haydeh-Hamkhooneh-128.mp3,%D9%87%D9%85%D8%AE%D9%88%D9%86%D9%87,%D9%87%D8%A7%DB%8C%D8%AF%D9%87
+https://dl6.tarikhema.org/music/h/haydeh/Haydeh-In-Rooza-128.mp3,%D8%A7%DB%8C%D9%86 این روزا,هایده
+https://dl6.tarikhema.org/music/h/haydeh/Haydeh-Mehraboone-Man-128.mp3,%D9%85%D9%87%D8%B1%D8%A8%D9%88%D9%86 مهربون من,هایده
+https://dl6.tarikhema.org/music/h/haydeh/Haydeh-Gole-Sang-128.mp3,%DA%AF%D9%84 گل سنگ,هایده
+https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-Tamasha-128.mp3,%D8%AA%D9%85%D8%A7%D8%B4%D8%A7,%D8%B4%D8%A7%D8%AF%D9%85%D9%87%D8%B1 عقیلی
+https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-Tardid-128.mp3,%D8%AA%D8%B1%D8%AF%DB%8C%D8%AF,%D8%B4%D8%A7%D8%AF%D9%85%D9%87%D8%B1 عقیلی
+https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-Baroon-Delam-Khast-128.mp3,%D8%A8%D8%A7%D8%B1%D9%88%D9%86 دلم خواست,شادمهر عقیلی
+https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-Daste-Man-Nist-128.mp3,%D8%AF%D8%B3%D8%AA من نیست,شادمهر عقیلی
+https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-Batel-128.mp3,%D8%A8%D8%A7%D8%B7%D9%84,%D8%B4%D8%A7%D8%AF%D9%85%D9%87%D8%B1 عقیلی
+https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-Taghdir-128.mp3,%D8%AA%D9%82%D8%AF%DB%8C%D8%B1,%D8%B4%D8%A7%D8%AF%D9%85%D9%87%D8%B1 عقیلی
+https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-Entekhab-128.mp3,%D8%A7%D9%86%D8%AA%D8%AE%D8%A7%D8%A8,%D8%B4%D8%A7%D8%AF%D9%85%D9%87%D8%B1 عقیلی
+https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-Hese-Khobiye-128.mp3,%D8%AD%D8%B3 خوبیه,شادمهر عقیلی
+https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-Ghazi-128.mp3,%D9%82%D8%A7%D8%B6%DB%8C,%D8%B4%D8%A7%D8%AF%D9%85%D9%87%D8%B1 عقیلی
+https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-Bi-Ehsas-128.mp3,%D8%A8%DB%8C احساس,شادمهر عقیلی
+https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-Avaz-Nemishi-128.mp3,%D8%B9%D9%88%D8%B6 نمیشی,شادمهر عقیلی
+https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-Hamishegi-128.mp3,%D9%87%D9%85%DB%8C%D8%B4%DA%AF%DB%8C,%D8%B4%D8%A7%D8%AF%D9%85%D9%87%D8%B1 عقیلی
+https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-Rooze-Sard-128.mp3,%D8%B1%D9%88%D8%B2 سرد,شادمهر عقیلی
+https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-Sarnevesht-128.mp3,%D8%B3%D8%B1%D9%86%D9%88%D8%B4%D8%AA,%D8%B4%D8%A7%D8%AF%D9%85%D9%87%D8%B1 عقیلی
+https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-Tasvir-128.mp3,%D8%AA%D8%B5%D9%88%DB%8C%D8%B1,%D8%B4%D8%A7%D8%AF%D9%85%D9%87%D8%B1 عقیلی
+https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-Door-Shdi-128.mp3,%D8%AF%D9%88%D8%B1 شدی,شادمهر عقیلی
+https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-Khabe-Khosh-128.mp3,%D8%AE%D9%88%D8%A7%D8%A8 خوش,شادمهر عقیلی
+https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-Ghalbe-Man-128.mp3,%D9%82%D9%84%D8%A8 من,شادمهر عقیلی
+https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-To-Bi-Man-128.mp3,%D8%AA%D9%88 بی من,شادمهر عقیلی
+https://dl6.tarikhema.org/music/s/shadmehr-aghili/Shadmehr-Aghili-Sedam-Bezan-128.mp3,صدام بزن,شادمهر عقیلی
