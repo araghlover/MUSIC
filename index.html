@@ -17,7 +17,7 @@
         
         body {
             font-family: 'Vazirmatn', sans-serif;
-            background-color: #020617; /* رنگ پس‌زمینه صفحه (خیلی تیره) */
+            background-color: #020617; 
             background-image: radial-gradient(#1e293b 1px, transparent 1px);
             background-size: 20px 20px;
             min-height: 100vh;
@@ -32,7 +32,7 @@
             height: 12px;
             width: 12px;
             border-radius: 50%;
-            background: #fbbf24; /* طلایی روشن */
+            background: #fbbf24;
             margin-top: -4px;
             cursor: pointer;
             box-shadow: 0 0 5px rgba(251, 191, 36, 0.5);
@@ -45,13 +45,12 @@
             border-radius: 2px;
         }
 
-        /* کانتینر اصلی پلیر با تم سرمه‌ای */
         .player-card {
-            background: #0f172a; /* سرمه‌ای تیره */
+            background: #0f172a;
             border-radius: 24px;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
             width: 100%;
-            max-width: 400px; /* کمی عریض‌تر برای جا شدن دکمه‌ها کنار متن */
+            max-width: 400px;
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.05);
             color: white;
@@ -86,14 +85,13 @@
             animation-play-state: paused;
         }
 
-        /* استایل هدر بزرگتر */
         .header-container {
             background-image: url('bg.png'); 
             background-size: cover;
             background-position: center;
             position: relative;
             overflow: hidden;
-            min-height: 160px; /* ارتفاع متناسب */
+            min-height: 160px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
         
@@ -113,6 +111,24 @@
             transform: translateY(-50%);
             z-index: 20;
         }
+
+        /* استایل اینپوت جستجو */
+        .search-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+        .search-box:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #fbbf24;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.2);
+        }
+        .search-box::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
     </style>
 </head>
 <body class="flex items-center justify-center p-4 min-h-screen">
@@ -125,19 +141,15 @@
             <img src="safhe.png" alt="Vinyl Disc" class="rotating-disc paused-anim" id="vinylDisc">
         </div>
 
-        <!-- بدنه پلیر (سرمه‌ای) -->
+        <!-- بدنه پلیر -->
         <div class="flex flex-col px-5 py-5 w-full">
             
-            <!-- ردیف اصلی: اطلاعات آهنگ + دکمه‌ها -->
             <div class="flex flex-row items-center justify-between w-full mb-5 gap-3">
-                
-                <!-- اطلاعات آهنگ (سمت راست) -->
                 <div class="flex flex-col overflow-hidden text-right flex-1 min-w-0 pr-1">
                     <h2 id="songTitle" class="text-lg font-bold text-white mb-0.5 truncate tracking-wide leading-tight">انتخاب آهنگ...</h2>
                     <p id="artistName" class="text-gray-400 text-xs font-light truncate">...</p>
                 </div>
 
-                <!-- دکمه‌های کنترل (سمت چپ) - جلو متن -->
                 <div class="flex items-center gap-3 shrink-0">
                     <button id="prevBtn" class="text-gray-400 hover:text-amber-400 transition active:scale-95 p-1">
                         <i data-lucide="skip-back" class="w-5 h-5"></i>
@@ -153,7 +165,6 @@
                 </div>
             </div>
 
-            <!-- نوار پیشرفت -->
             <div class="w-full mb-1 flex justify-between text-[10px] text-gray-500 font-mono dir-ltr">
                 <span id="currentTime">0:00</span>
                 <span id="duration">0:00</span>
@@ -161,8 +172,15 @@
             <input type="range" id="progressBar" value="0" class="w-full mb-2" disabled>
         </div>
 
-        <!-- لیست پخش (سرمه‌ای تیره) -->
-        <div class="bg-[#0b1120] border-t border-white/5 p-2">
+        <!-- لیست پخش -->
+        <div class="bg-[#0b1120] border-t border-white/5 p-3">
+            <!-- جستجو -->
+            <div class="relative mb-3">
+                <input type="text" id="searchInput" placeholder="جستجوی نام خواننده یا آهنگ..." 
+                       class="search-box w-full px-4 py-2 rounded-lg pr-10">
+                <i data-lucide="search" class="w-4 h-4 text-gray-500 absolute top-3 right-3 pointer-events-none"></i>
+            </div>
+
             <div class="playlist-scroll overflow-y-auto px-1">
                 <ul id="playlistContainer" class="space-y-1">
                     <li class="text-center text-xs text-gray-500 py-4">در حال خواندن فایل...</li>
@@ -187,11 +205,14 @@
         const durationEl = document.getElementById('duration');
         const playlistContainer = document.getElementById('playlistContainer');
         const vinylDisc = document.getElementById('vinylDisc');
+        const searchInput = document.getElementById('searchInput'); // المنت جستجو
 
         let playlist = [];
-        let currentTrackIndex = 0;
+        let filteredPlaylist = []; // لیست فیلتر شده برای نمایش
+        let currentTrackIndex = 0; // ایندکس در لیست اصلی
         let isPlaying = false;
 
+        // لود کردن فایل
         async function loadPlaylistFile() {
             try {
                 const timestamp = new Date().getTime();
@@ -226,9 +247,12 @@ https://cdn.musicgitar.ir/Music/Mahasti/320/Mahasti%20-%20Mosafer%20[320].mp3?sr
                         artist: parts[2]?.trim() || "ناشناس"
                     };
                 });
+            
+            // در ابتدا لیست فیلتر شده همان لیست اصلی است
+            filteredPlaylist = [...playlist];
 
             if (playlist.length > 0) {
-                renderPlaylistUI();
+                renderPlaylistUI(filteredPlaylist);
                 loadTrack(0, false);
             } else {
                 songTitle.innerText = "لیست خالی";
@@ -237,23 +261,45 @@ https://cdn.musicgitar.ir/Music/Mahasti/320/Mahasti%20-%20Mosafer%20[320].mp3?sr
             }
         }
 
-        function renderPlaylistUI() {
+        // تابع نمایش لیست (با ورودی دلخواه)
+        function renderPlaylistUI(items) {
             playlistContainer.innerHTML = '';
-            playlist.forEach((track, index) => {
+            
+            if (items.length === 0) {
+                playlistContainer.innerHTML = '<li class="text-center text-xs text-gray-500 py-2">نتیجه‌ای یافت نشد</li>';
+                return;
+            }
+
+            items.forEach((track) => {
+                // پیدا کردن ایندکس واقعی آهنگ در لیست اصلی برای درست کار کردن کلیک
+                const realIndex = playlist.indexOf(track);
+                
                 const li = document.createElement('li');
-                li.className = `p-3 rounded-lg cursor-pointer flex items-center justify-between text-xs group hover:bg-white/5 transition border border-transparent ${index === currentTrackIndex ? 'playing-row' : ''}`;
+                li.className = `p-3 rounded-lg cursor-pointer flex items-center justify-between text-xs group hover:bg-white/5 transition border border-transparent ${realIndex === currentTrackIndex ? 'playing-row' : ''}`;
                 li.innerHTML = `
                     <div class="flex flex-col overflow-hidden w-full">
                         <span class="font-bold truncate text-gray-200 group-hover:text-amber-400">${track.title}</span>
                         <span class="text-[10px] text-gray-500 truncate mt-0.5">${track.artist}</span>
                     </div>
-                    ${index === currentTrackIndex ? '<div class="mr-2"><div class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></div></div>' : ''}
+                    ${realIndex === currentTrackIndex ? '<div class="mr-2"><div class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></div></div>' : ''}
                 `;
-                li.onclick = () => loadTrack(index, true);
+                li.onclick = () => loadTrack(realIndex, true);
                 playlistContainer.appendChild(li);
             });
             lucide.createIcons();
         }
+
+        // لاجیک جستجو
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            
+            filteredPlaylist = playlist.filter(track => 
+                track.title.toLowerCase().includes(query) || 
+                track.artist.toLowerCase().includes(query)
+            );
+            
+            renderPlaylistUI(filteredPlaylist);
+        });
 
         function loadTrack(index, playImmediately) {
             currentTrackIndex = index;
@@ -263,7 +309,9 @@ https://cdn.musicgitar.ir/Music/Mahasti/320/Mahasti%20-%20Mosafer%20[320].mp3?sr
             songTitle.innerText = track.title;
             artistName.innerText = track.artist;
             
-            renderPlaylistUI();
+            // بروزرسانی UI (برای اینکه هایلایت آهنگ فعال جابجا شود)
+            // از filteredPlaylist استفاده می‌کنیم تا اگر جستجو فعال بود، لیست نپرد
+            renderPlaylistUI(filteredPlaylist);
 
             if (playImmediately) {
                 playSong();
@@ -312,7 +360,6 @@ https://cdn.musicgitar.ir/Music/Mahasti/320/Mahasti%20-%20Mosafer%20[320].mp3?sr
             
             const progressPercent = (currentTime / duration) * 100;
             progressBar.value = progressPercent;
-            // تنظیم جهت متن زمان برای نمایش صحیح
             currentTimeEl.parentElement.style.direction = 'ltr';
             currentTimeEl.innerText = formatTime(currentTime);
             durationEl.innerText = formatTime(duration);
