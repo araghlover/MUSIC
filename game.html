@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>بازی بطری بازی</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* --- تم دارک (تیره) --- */
+            --bg-color: #0f172a;       /* سرمه‌ای خیلی تیره / مشکی */
+            --primary-color: #e2e8f0;  /* سفید/خاکستری روشن برای متن */
+            --container-bg: rgba(30, 41, 59, 0.9); /* رنگ پس‌زمینه کادرها */
+            --secondary-color: #3b82f6; /* آبی روشن برای هاور */
+            --accent-color: #fbbf24;   /* طلایی درخشان */
+            --input-bg: #1e293b;       /* رنگ پس‌زمینه اینپوت‌ها */
+            --error-color: #ef4444;    /* قرمز روشن */
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Vazirmatn', 'Tahoma', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--primary-color);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        /* دکمه لینک بازگشت (بالا راست) */
+        .top-link-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--accent-color);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            border: 1px solid var(--accent-color);
+            transition: all 0.3s ease;
+            z-index: 50; /* بالاتر از همه چیز */
+            display: flex; /* برای وسط چین کردن متن */
+            align-items: center;
+            gap: 5px;
+        }
+
+        .top-link-btn:hover {
+            background-color: var(--accent-color);
+            color: #000;
+            box-shadow: 0 0 15px rgba(251, 191, 36, 0.5);
+        }
+
+        /* --- صفحه تنظیمات --- */
+        #setup-screen {
+            text-align: center;
+            background: var(--container-bg);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            width: 90%;
+            max-width: 400px;
+            z-index: 20; 
+            transition: opacity 0.5s ease;
+        }
+
+        h1 {
+            margin: 0 0 1.5rem 0;
+            color: var(--accent-color);
+            font-size: 2rem;
+            font-weight: 900;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        input[type="text"] {
+            padding: 12px;
+            border-radius: 12px;
+            border: 2px solid #475569;
+            background: var(--input-bg);
+            color: var(--primary-color);
+            font-size: 1rem;
+            font-family: 'Vazirmatn', sans-serif;
+            flex-grow: 1;
+            outline: none;
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="text"]:focus {
+            border-color: var(--accent-color);
+        }
+
+        .btn {
+            background-color: #334155;
+            color: var(--primary-color);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-family: 'Vazirmatn', sans-serif;
+            font-weight: 700;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            background-color: #475569;
+            color: var(--accent-color);
+        }
+
+        .btn-start {
+            width: 100%;
+            margin-top: 15px;
+            background-color: var(--accent-color);
+            color: #0f172a; /* متن تیره روی دکمه طلایی */
+        }
+        
+        .btn-start:hover {
+            background-color: #f59e0b;
+            color: #000;
+            box-shadow: 0 0 15px rgba(251, 191, 36, 0.4);
+        }
+
+        #players-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            max-height: 200px;
+            overflow-y: auto;
+            text-align: right;
+        }
+
+        #players-list li {
+            background: rgba(255,255,255,0.05);
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            padding: 10px 15px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .remove-btn {
+            background: transparent;
+            border: none;
+            color: #f87171;
+            cursor: pointer;
+            font-size: 1.4rem;
+            padding: 0 5px;
+        }
+
+        .error-msg {
+            color: var(--error-color);
+            font-size: 0.9rem;
+            margin-top: 10px;
+            min-height: 20px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-weight: 700;
+        }
+
+        /* --- صفحه بازی --- */
+        #game-board {
+            display: none;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease;
+            overflow: hidden;
+        }
+
+        /* پس‌زمینه رنگی محدوده‌ها */
+        #zones-background {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200vmax;
+            height: 200vmax;
+            border-radius: 50%;
+            z-index: 1;
+            transition: transform 1s ease;
+            opacity: 0.6; /* کمتر کردن شفافیت برای دارک مود */
+            filter: saturate(1.2); /* اشباع رنگ بیشتر برای حالت نئونی */
+        }
+
+        /* کانتینر بطری */
+        #bottle-wrapper {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            /* سایه تیره‌تر و درخشان برای وسط */
+            background: radial-gradient(circle, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.8) 40%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+
+        #bottle {
+            width: 140px; 
+            max-height: 300px;
+            height: auto;
+            transition: transform 4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+            cursor: pointer;
+            transform-origin: center center;
+        }
+
+        /* بازیکنان */
+        .player-spot {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: auto;
+            min-width: 80px;
+            padding: 8px 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 900;
+            
+            /* استایل تیره برای بازیکنان */
+            background-color: #1e293b;
+            color: #e2e8f0;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+            
+            z-index: 5;
+            transition: all 0.5s ease;
+        }
+
+        /* حالت برنده - روشن شدن (نئونی) */
+        .player-spot.winner {
+            background-color: var(--accent-color);
+            color: #000;
+            border: 2px solid #fff;
+            transform: translate(-50%, -50%) scale(1.4) !important;
+            box-shadow: 
+                0 0 20px var(--accent-color),
+                0 0 40px rgba(251, 191, 36, 0.6);
+            z-index: 15;
+        }
+
+        /* حالت کم‌نور */
+        .player-spot.dimmed {
+            opacity: 0.3;
+            transform: translate(-50%, -50%) scale(0.9) !important;
+            filter: grayscale(0.8);
+        }
+
+        #spin-btn {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 15px 50px;
+            font-size: 1.3rem;
+            z-index: 20;
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.2);
+            background-color: var(--accent-color);
+            color: #0f172a;
+        }
+        
+        #spin-btn:hover {
+            box-shadow: 0 0 30px rgba(251, 191, 36, 0.4);
+        }
+        
+        #spin-btn:disabled {
+            background-color: #475569;
+            color: #94a3b8;
+            box-shadow: none;
+        }
+
+        #reset-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(30, 41, 59, 0.8);
+            color: var(--primary-color);
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            z-index: 30;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        @media (max-width: 480px) {
+            #bottle { width: 100px; }
+            .player-spot { font-size: 0.85rem; padding: 5px 10px; }
+            #spin-btn { bottom: 30px; font-size: 1.1rem; }
+            .top-link-btn { font-size: 0.8rem; padding: 6px 12px; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- دکمه لینک به موزیک (فقط در صفحه اول نمایش داده می‌شود اما اینجا گلوبال گذاشتم و با JS کنترل میکنم اگر نیاز بود، اما فعلا ثابت است) -->
+    <!-- اگر میخواهید فقط در صفحه اول باشد، می‌توانیم در JS کنترل کنیم، اما اینجا همیشه هست چون درخواست کردید "گزینه صفحه اول" -->
+    <a href="https://araghlover.github.io/MUSIC/" class="top-link-btn" id="external-link">
+        <span>بازگشت</span>
+        <span style="font-size: 1.2em;">↩</span>
+    </a>
+
+    <div id="setup-screen">
+        <h1>بطری بازی 🍾</h1>
+        <div class="input-group">
+            <input type="text" id="player-name" placeholder="نام بازیکن" maxlength="12" onkeypress="handleEnter(event)">
+            <button class="btn" onclick="addPlayer()">+</button>
+        </div>
+        <div id="error-msg" class="error-msg"></div>
+        <ul id="players-list"></ul>
+        <button class="btn btn-start" onclick="startGame()">شروع بازی</button>
+    </div>
+
+    <div id="game-board">
+        <!-- پس‌زمینه رنگی چرخنده -->
+        <div id="zones-background"></div>
+
+        <button id="reset-btn" class="btn" onclick="resetGame()">بازگشت</button>
+        
+        <div id="bottle-wrapper">
+            <!-- 
+                ==========================================================
+                مهم: حتما فایل عکس خود را با نام bottle.png در کنار این
+                فایل HTML قرار دهید.
+                ==========================================================
+            -->
+            <img id="bottle" src="bottle.png" alt="بطری" onerror="this.style.display='none'; alert('لطفا فایل bottle.png را اضافه کنید');">
+        </div>
+
+        <button id="spin-btn" class="btn" onclick="spinBottle()">بچرخون!</button>
+    </div>
+
+    <script>
+        let players = [];
+        let playerColors = [];
+        let currentRotation = 0;
+        let isSpinning = false;
+
+        const nameInput = document.getElementById('player-name');
+        const errorDiv = document.getElementById('error-msg');
+        const setupScreen = document.getElementById('setup-screen');
+        const gameBoard = document.getElementById('game-board');
+        const playersList = document.getElementById('players-list');
+        const spinBtn = document.getElementById('spin-btn');
+        const bottle = document.getElementById('bottle');
+        const zonesBg = document.getElementById('zones-background');
+        const externalLink = document.getElementById('external-link');
+
+        // پالت رنگی برای دارک مود (کمی زنده‌تر برای کنتراست)
+        const colorPalette = [
+            '#ef4444', // قرمز
+            '#f97316', // نارنجی
+            '#facc15', // زرد
+            '#84cc16', // لیمویی
+            '#10b981', // سبز زمردی
+            '#06b6d4', // فیروزه‌ای
+            '#3b82f6', // آبی
+            '#6366f1', // نیلی
+            '#8b5cf6', // بنفش
+            '#d946ef', // صورتی
+            '#f43f5e', // سرخابی
+            '#94a3b8'  // خاکستری
+        ];
+
+        function showError(msg) {
+            errorDiv.textContent = msg;
+            errorDiv.style.opacity = '1';
+            setTimeout(() => errorDiv.style.opacity = '0', 3000);
+        }
+
+        function addPlayer() {
+            const name = nameInput.value.trim();
+            if (!name) return showError("لطفا نام را وارد کنید");
+            if (players.includes(name)) return showError("نام تکراری است");
+            if (players.length >= 12) return showError("حداکثر ۱۲ نفر");
+
+            players.push(name);
+            renderPlayerList();
+            nameInput.value = '';
+            nameInput.focus();
+        }
+
+        function removePlayer(index) {
+            players.splice(index, 1);
+            renderPlayerList();
+        }
+
+        function handleEnter(e) { if (e.key === 'Enter') addPlayer(); }
+
+        function renderPlayerList() {
+            playersList.innerHTML = '';
+            players.forEach((player, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `<span>${player}</span><button class="remove-btn" onclick="removePlayer(${index})">×</button>`;
+                playersList.appendChild(li);
+            });
+        }
+
+        function startGame() {
+            if (players.length < 2) return showError("حداقل ۲ نفر لازم است");
+            
+            playerColors = players.map((_, i) => colorPalette[i % colorPalette.length]);
+
+            // مخفی کردن دکمه لینک خارجی هنگام شروع بازی
+            externalLink.style.display = 'none';
+
+            setupScreen.style.opacity = '0';
+            setTimeout(() => {
+                setupScreen.style.display = 'none';
+                gameBoard.style.display = 'block';
+                setTimeout(() => {
+                    gameBoard.style.opacity = '1';
+                    arrangePlayers();
+                    drawZones();
+                }, 50);
+            }, 500);
+        }
+
+        function resetGame() {
+            gameBoard.style.opacity = '0';
+            setTimeout(() => {
+                gameBoard.style.display = 'none';
+                setupScreen.style.display = 'block';
+                
+                // نمایش مجدد دکمه لینک خارجی
+                externalLink.style.display = 'flex';
+
+                document.querySelectorAll('.player-spot').forEach(el => el.remove());
+                currentRotation = 0;
+                bottle.style.transform = `rotate(0deg)`;
+                resetHighlights();
+                
+                setTimeout(() => setupScreen.style.opacity = '1', 50);
+            }, 500);
+        }
+
+        function drawZones() {
+            const total = players.length;
+            const step = 360 / total;
+            
+            let gradientStr = 'conic-gradient(';
+            
+            for(let i=0; i<total; i++) {
+                const start = i * step;
+                const end = (i + 1) * step;
+                gradientStr += `${playerColors[i]} ${start}deg ${end}deg`;
+                if (i < total - 1) gradientStr += ', ';
+            }
+            gradientStr += ')';
+
+            zonesBg.style.background = gradientStr;
+            zonesBg.style.transform = `translate(-50%, -50%) rotate(-${step/2}deg)`;
+        }
+
+        function arrangePlayers() {
+            const radius = Math.min(window.innerWidth, window.innerHeight) * 0.35; 
+            const totalPlayers = players.length;
+            const angleStep = 360 / totalPlayers;
+
+            players.forEach((player, index) => {
+                const playerDiv = document.createElement('div');
+                playerDiv.className = 'player-spot';
+                playerDiv.id = `player-${index}`;
+                playerDiv.textContent = player;
+                
+                // رنگ حاشیه بازیکن همرنگ ناحیه او
+                playerDiv.style.borderColor = playerColors[index];
+                // سایه رنگی خفیف
+                playerDiv.style.boxShadow = `0 0 10px ${playerColors[index]}40`;
+
+                const angleDeg = (index * angleStep) - 90; 
+                const angleRad = angleDeg * (Math.PI / 180);
+                const x = radius * Math.cos(angleRad);
+                const y = radius * Math.sin(angleRad);
+
+                playerDiv.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(0)`;
+                gameBoard.appendChild(playerDiv);
+
+                setTimeout(() => {
+                    playerDiv.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(1)`;
+                }, index * 100);
+            });
+        }
+
+        function resetHighlights() {
+            document.querySelectorAll('.player-spot').forEach(el => {
+                el.classList.remove('winner', 'dimmed');
+            });
+        }
+
+        function spinBottle() {
+            if (isSpinning) return;
+            isSpinning = true;
+            spinBtn.disabled = true;
+            
+            resetHighlights();
+
+            const minSpins = 5;
+            const randomAngle = Math.floor(Math.random() * 360);
+            const totalDegrees = (minSpins * 360) + randomAngle;
+            
+            currentRotation += totalDegrees;
+            bottle.style.transform = `rotate(${currentRotation}deg)`;
+
+            setTimeout(() => {
+                isSpinning = false;
+                spinBtn.disabled = false;
+                highlightWinner();
+            }, 4000); 
+        }
+
+        function highlightWinner() {
+            const finalAngle = currentRotation % 360;
+            const totalPlayers = players.length;
+            const angleStep = 360 / totalPlayers;
+            
+            let winningIndex = Math.round(finalAngle / angleStep);
+            if (winningIndex === totalPlayers) winningIndex = 0;
+
+            players.forEach((_, index) => {
+                const el = document.getElementById(`player-${index}`);
+                if (index === winningIndex) {
+                    el.classList.add('winner');
+                } else {
+                    el.classList.add('dimmed');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
