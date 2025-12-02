@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <!-- تغییر: اضافه شدن user-scalable=no برای جلوگیری از زوم -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>پلی‌لیست من</title>
+    <title>پلی‌لیست </title>
     
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
@@ -189,11 +189,21 @@
 
         <!-- لیست پخش (با ارتفاع تمام صفحه) -->
         <div class="playlist-wrapper">
-            <!-- جستجو -->
-            <div class="relative mb-3 sticky top-0 z-10 bg-[#0b1120] pb-2 pt-1">
-                <input type="text" id="searchInput" placeholder="جستجوی نام خواننده یا آهنگ..." 
-                       class="search-box w-full px-4 py-2 rounded-lg pr-10">
-                <i data-lucide="search" class="w-4 h-4 text-gray-500 absolute top-4 right-3 pointer-events-none"></i>
+            <!-- هدر چسبان شامل دکمه بازی و جستجو -->
+            <div class="relative mb-3 sticky top-0 z-10 bg-[#0b1120] pb-2 pt-1 flex flex-col gap-2">
+                
+                <!-- دکمه ورود به بازی -->
+                <a href="game.html" class="w-full bg-gradient-to-r from-amber-900/40 to-amber-800/40 border border-amber-700/30 text-amber-200 text-sm font-bold text-center py-2.5 rounded-lg hover:from-amber-800/50 hover:to-amber-700/50 transition flex items-center justify-center gap-2 shadow-sm">
+                    <i data-lucide="gamepad-2" class="w-4 h-4"></i>
+                    <span>ورود به بازی</span>
+                </a>
+
+                <!-- جستجو -->
+                <div class="relative">
+                    <input type="text" id="searchInput" placeholder="جستجوی نام خواننده یا آهنگ..." 
+                           class="search-box w-full px-4 py-2 rounded-lg pr-10">
+                    <i data-lucide="search" class="w-4 h-4 text-gray-500 absolute top-3 right-3 pointer-events-none"></i>
+                </div>
             </div>
 
             <ul id="playlistContainer" class="space-y-1">
@@ -398,4 +408,3 @@ https://cdn.musicgitar.ir/Music/Mahasti/320/Mahasti%20-%20Mosafer%20[320].mp3?sr
     </script>
 </body>
 </html>
-
